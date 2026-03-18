@@ -7,10 +7,35 @@
     "start": "electron .",
     "build": "electron-builder"
   },
+  "build": {
+    "appId": "com.metroaccess.dashboard",
+    "productName": "Metro Dashboard",
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "files": [
+      "index.html",
+      "style.css",
+      "script.js",
+      "main.js",
+      "preload.js",
+      "assets/**"
+    ],
+    "publish": {
+      "provider": "github",
+      "releaseType": "release"
+    }
+  },
   "keywords": [],
   "author": "Metro Access Control",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^36.0.0"
+    "electron": "^36.0.0",
+    "electron-builder": "^26.0.12"
   }
 }
