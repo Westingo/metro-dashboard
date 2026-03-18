@@ -1,0 +1,16 @@
+{
+  "name": "metro-dashboard",
+  "version": "1.0.0",
+  "description": "Metro Access Control - Doorking Operations Dashboard",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "keywords": [],
+  "author": "Metro Access Control",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^36.0.0"
+  }
+}

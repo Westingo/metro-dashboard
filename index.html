@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metro Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-brand">
+            <span class="brand-name">Metro access control</span>
+            <span class="brand-divider">|</span>
+            <span class="brand-product">Doorking Operations</span>
+        </div>
+        <div class="header-meta">
+            <span id="current-date"></span>
+        </div>
+    </header>
+
+
+    <!-- HERO  -->
+    <section class="hero">
+        <h1 class="hero-title">Metro Dashboard</h1>
+        <p class="hero-subtitle">
+            Your central launcher for Doorking Account Manager, training resources,
+            troubleshooting guides, and field tools.
+        </p>
+    </section>
+
+    <main class="main-content">
+
+        <!-- TECHNICIAN SNAPSHOT -->
+        <section class="technician-snapshot">
+            <div class="snapshot-card">
+                <span class="snapshot-label">Technician</span>
+                <span class="snapshot-value" id="tech-name">Field Tech</span>
+            </div>
+            <div class="snapshot-card">
+                <span class="snapshot-label">Last Login</span>
+                <span class="snapshot-value">Today</span>
+            </div>
+        </section>
+
+        <!-- SEARCH BAR -->
+        <section class="search-section">
+            <input type="text" id="search-bar" class="search-bar" placeholder="search tools,guides,contracts" />
+        </section>
+
+
+
+        <!-- Launcher CARDS -->
+        <section class="launcher-section">
+            <h2 class="section-title">Quick Launch</h2>
+            <div class="card-grid">
+
+                <div class="card" data-category="tool"
+                    data-exe="C:\Program Files (x86)\DoorKing\DoorKing Account Manager\DoorKing32.exe">
+                    <div class="card-icon">💻</div>
+                    <div class="card-title">Doorking Account Manager</div>
+                    <div class="card-desc">Launch DoorKing32 Account Manager</div>
+                </div>
+
+
+                <div class="card" data-catagory="training">
+                    <div class="card-icon">🎓</div>
+                    <div class="card-title">1835 Training</div>
+                    <div class="card-desc">Step-by-step training the the 1835</div>
+                </div>
+
+                <div class="card" data-catagory="troubleshooting">
+                    <div class="card-icon">🛠️</div>
+                    <div class="card-title">Troubleshooting Guide</div>
+                    <div class="card-desc">Common issues and solutions for the 1835</div>
+                </div>
+
+                <div class="card" data-catagory="workflow">
+                    <div class="card-icon">📋</div>
+                    <div class="card-title">Programming Workflow</div>
+                    <div class="card-desc">Recommended workflow for programming the 1835</div>
+                </div>
+
+                <div class="card" data-catagory="Contacts">
+                    <div class="card-icon">📞</div>
+                    <div class="card-title">Metro Support Contacts</div>
+                    <div class="card-desc">Internal contacts and escalation paths</div>
+                </div>
+
+                <div class="card" data-catagory="documents">
+                    <div class="card-icon">📁</div>
+                    <div class="card-title">Site Files & Documents</div>
+                    <div class="card-desc">Access site-specific files and documentation</div>
+                </div>
+
+            </div>
+        </section>
+
+
+
+        <!-- RECOMMENDED WORKFLOW -->
+        <section class="workflow-section">
+            <h2 class="section-title">Recommended Workflow</h2>
+            <ol class="workflow-list">
+                <li>Log into Doorking Account Manager</li>
+                <li>Pull up the site file for the job location</li>
+                <li>Review the programming workflow checklist</li>
+                <li>Complete programming and test entry/exit</li>
+                <li>Document any issues in Field Notes below</li>
+            </ol>
+        </section>
+
+        <!-- FIELD NOTES -->
+        <section class="notes-section">
+            <h2 class="section-title">Field Notes</h2>
+            <textarea id="field-notes" class="field-notes"
+                placeholder="Type your field notes here... (not saved permanently yet)" rows="6"></textarea>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <p>Metro Access Control &copy; 2025 &mdash; Internal Use Only</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
