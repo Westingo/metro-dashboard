@@ -1,5 +1,6 @@
 const { app, BrowserWindow, shell, ipcMain } = require('electron')
 const { exec } = require('child_process')
+const { autoUpdater } = require('electron-updater')
 const path = require('path')
 
 function createWindow() {
@@ -19,17 +20,11 @@ function createWindow() {
   win.loadFile('index.html')
 }
 
-// Handle .exe launch requests from the dashboard
-ipcMain.handle('launch-exe', (event, exePath) => {
-  exec(`"${exePath}"`, (error) => {
-    if (error) {
-      console.error('Failed to launch:', error)
-    }
-  })
-})
-
 app.whenReady().then(() => {
   createWindow()
+
+  // Check for updates after app loads
+  autoUpdater.checkForUpdatesAndNotify()
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
@@ -38,4 +33,13 @@ app.whenReady().then(() => {
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
+})
+
+// Handle .exe launch requests from the dashboard
+ipcMain.handle('launch-exe', (event, exePath) => {
+  exec(`"${exePath}"`, (error) => {
+    if (error) {
+      console.error('Failed to launch:', error)
+    }
+  })
 })

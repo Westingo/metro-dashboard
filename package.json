@@ -28,6 +28,8 @@
     ],
     "publish": {
       "provider": "github",
+      "owner": "Westingo",
+      "repo": "metro-dashboard",
       "releaseType": "release"
     }
   },
@@ -37,5 +39,8 @@
   "devDependencies": {
     "electron": "^36.0.0",
     "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.3"
   }
 }
