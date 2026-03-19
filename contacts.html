@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Metro Support Contacts</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .contacts-page {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 32px 24px 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-left: 4px solid var(--color-accent);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-role {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      margin-bottom: 10px;
+    }
+
+    .contact-number {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-accent-light);
+      margin-bottom: 6px;
+    }
+
+    .contact-email {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-brand">
+      <span class="brand-name">Metro Access Control</span>
+      <span class="brand-divider">|</span>
+      <span class="brand-product">Support Contacts</span>
+    </div>
+  </header>
+
+  <div class="contacts-page">
+    <h2 class="section-title">Metro Support Contacts</h2>
+
+    <div class="contact-card">
+      <div class="contact-role">Access Control & Gates Dispatch</div>
+      <div class="contact-number">(503) 585-4716</div>
+      <div class="contact-email">Dispatcher@metrogates.com</div>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-role">Overhead Door Dispatch</div>
+      <div class="contact-number">(503) 285-7568</div>
+      <div class="contact-email">service@metrooverheaddoor.com</div>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-role">Pedestrian Door Dispatch</div>
+      <div class="contact-number">(503) 595-4719</div>
+      <div class="contact-email">Annw@metrogates.com</div>
+    </div>
+  </div>
+
+</body>
+</html>

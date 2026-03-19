@@ -33,20 +33,6 @@ searchBar.addEventListener('input', function () {
 });
 
 
-// =====================
-// 3. FIELD NOTES AUTO-SAVE
-// =====================
-const notesArea = document.getElementById('field-notes');
-
-// Load any previously saved notes on page load
-if (localStorage.getItem('fieldNotes')) {
-    notesArea.value = localStorage.getItem('fieldNotes');
-}
-
-// Save notes every time the user types
-notesArea.addEventListener('input', function () {
-    localStorage.setItem('fieldNotes', this.value);
-});
 
 
 // =====================
