@@ -72,14 +72,13 @@ function showToast(message) {
 // =====================
 // 5. CARD CLICK HANDLER
 // =====================
-const DOORKING_DOWNLOAD_URL = 'https://www.doorking.com/telephone-entry/software';
-
 const cards = document.querySelectorAll('.card');
 
 cards.forEach(function (card) {
   card.addEventListener('click', async function () {
     const url = card.dataset.url;
     const exe = card.dataset.exe;
+    const downloadUrl = card.dataset.downloadUrl;
     const title = card.querySelector('.card-title').textContent;
 
     try {
@@ -88,9 +87,11 @@ cards.forEach(function (card) {
           const exists = await window.electronAPI.checkExeExists(exe);
           if (exists) {
             window.electronAPI.launchExe(exe);
+          } else if (downloadUrl) {
+            showToast(title + ' not found — opening download page');
+            setTimeout(() => window.electronAPI.openExternal(downloadUrl), 1500);
           } else {
-            showToast('DoorKing not found — opening download page');
-            setTimeout(() => window.electronAPI.openExternal(DOORKING_DOWNLOAD_URL), 1500);
+            showToast(title + ' not found on this machine');
           }
         } else {
           showToast('This feature requires the desktop app');
