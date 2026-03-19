@@ -67,6 +67,18 @@ body {
 .header-meta {
     font-size: 0.85rem;
     opacity: 0.75;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-dispatch {
+    font-weight: 600;
+    opacity: 1;
+}
+
+.header-meta-divider {
+    opacity: 0.4;
 }
 
 /* ==================
