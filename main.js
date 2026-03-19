@@ -82,3 +82,18 @@ ipcMain.handle('check-exe-exists', (event, exePath) => {
 ipcMain.handle('open-external', (event, url) => {
   shell.openExternal(url)
 })
+
+// Open an internal page in a new window
+ipcMain.handle('open-page', (event, page) => {
+  const pageWin = new BrowserWindow({
+    width: 800,
+    height: 600,
+    title: 'Metro Dashboard',
+    webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js')
+    }
+  })
+  pageWin.loadFile(page)
+})

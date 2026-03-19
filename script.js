@@ -79,10 +79,15 @@ cards.forEach(function (card) {
     const url = card.dataset.url;
     const exe = card.dataset.exe;
     const downloadUrl = card.dataset.downloadUrl;
+    const page = card.dataset.page;
     const title = card.querySelector('.card-title').textContent;
 
     try {
-      if (exe && exe.trim() !== '') {
+      if (page && page.trim() !== '') {
+        if (window.electronAPI && typeof window.electronAPI.openPage === 'function') {
+          window.electronAPI.openPage(page);
+        }
+      } else if (exe && exe.trim() !== '') {
         if (window.electronAPI && typeof window.electronAPI.checkExeExists === 'function') {
           const exists = await window.electronAPI.checkExeExists(exe);
           if (exists) {
