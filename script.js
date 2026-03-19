@@ -62,24 +62,30 @@ cards.forEach(function (card) {
     const exe = card.dataset.exe;
     const title = card.querySelector('.card-title').textContent;
 
-    if (exe && exe.trim() !== '') {
-      if (window.electronAPI) {
-        const exists = await window.electronAPI.checkExeExists(exe);
-        if (exists) {
-          window.electronAPI.launchExe(exe);
+    try {
+      if (exe && exe.trim() !== '') {
+        if (window.electronAPI && typeof window.electronAPI.checkExeExists === 'function') {
+          const exists = await window.electronAPI.checkExeExists(exe);
+          if (exists) {
+            window.electronAPI.launchExe(exe);
+          } else {
+            showToast('DoorKing not found — opening download page');
+            setTimeout(() => window.electronAPI.openExternal(DOORKING_DOWNLOAD_URL), 1500);
+          }
         } else {
-          showToast('DoorKing not found — opening download page');
-          setTimeout(() => window.electronAPI.openExternal(DOORKING_DOWNLOAD_URL), 1500);
+          showToast('This feature requires the desktop app');
+        }
+      } else if (url && url.trim() !== '') {
+        if (window.electronAPI && typeof window.electronAPI.openExternal === 'function') {
+          window.electronAPI.openExternal(url);
+        } else {
+          window.open(url, '_blank');
         }
       } else {
-        showToast('This feature requires the desktop app');
+        showToast(title + ' — link coming soon');
       }
-    } else if (url && url.trim() !== '') {
-      window.electronAPI
-        ? window.electronAPI.openExternal(url)
-        : window.open(url, '_blank');
-    } else {
-      showToast(title + ' — link coming soon');
+    } catch (err) {
+      showToast('Error: ' + err.message);
     }
   });
 });
