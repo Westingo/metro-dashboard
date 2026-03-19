@@ -1,4 +1,4 @@
-const { app, BrowserWindow, shell, ipcMain } = require('electron')
+const { app, BrowserWindow, shell, ipcMain, dialog } = require('electron')
 const { exec } = require('child_process')
 const { autoUpdater } = require('electron-updater')
 const path = require('path')
@@ -23,8 +23,36 @@ function createWindow() {
 app.whenReady().then(() => {
   createWindow()
 
-  // Check for updates after app loads
   autoUpdater.checkForUpdatesAndNotify()
+
+  autoUpdater.on('update-available', () => {
+    console.log('Update available')
+    dialog.showMessageBox({
+      type: 'info',
+      title: 'Update Available',
+      message: 'A new version of Metro Dashboard is downloading...'
+    })
+  })
+
+  autoUpdater.on('update-not-available', () => {
+    console.log('No update available')
+  })
+
+  autoUpdater.on('error', (err) => {
+    console.log('Update error: ' + err)
+  })
+
+  autoUpdater.on('update-downloaded', () => {
+    console.log('Update downloaded')
+    dialog.showMessageBox({
+      type: 'info',
+      title: 'Update Ready',
+      message: 'Update downloaded. Metro Dashboard will restart to install the update.',
+      buttons: ['Restart Now']
+    }).then(() => {
+      autoUpdater.quitAndInstall()
+    })
+  })
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
