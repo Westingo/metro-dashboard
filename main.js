@@ -71,3 +71,9 @@ ipcMain.handle('launch-exe', (event, exePath) => {
     }
   })
 })
+
+// Check if a file exists on the machine
+ipcMain.handle('check-exe-exists', (event, exePath) => {
+  const fs = require('fs')
+  return fs.existsSync(exePath)
+})

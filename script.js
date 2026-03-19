@@ -52,17 +52,25 @@ notesArea.addEventListener('input', function () {
 // =====================
 // 4. CARD CLICK HANDLER
 // =====================
+const DOORKING_DOWNLOAD_URL = 'https://www.doorking.com/telephone-entry/software';
+
 const cards = document.querySelectorAll('.card');
 
 cards.forEach(function (card) {
-  card.addEventListener('click', function () {
+  card.addEventListener('click', async function () {
     const url = card.dataset.url;
     const exe = card.dataset.exe;
     const title = card.querySelector('.card-title').textContent;
 
     if (exe && exe.trim() !== '') {
       if (window.electronAPI) {
-        window.electronAPI.launchExe(exe);
+        const exists = await window.electronAPI.checkExeExists(exe);
+        if (exists) {
+          window.electronAPI.launchExe(exe);
+        } else {
+          showToast('DoorKing not found — opening download page');
+          setTimeout(() => window.open(DOORKING_DOWNLOAD_URL, '_blank'), 1500);
+        }
       } else {
         showToast('This feature requires the desktop app');
       }

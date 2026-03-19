@@ -1,18 +1,18 @@
 /* =====================
-   CSS VARIABLES (Brand Kit)
+   CSS VARIABLES (Dark Mode Brand Kit)
    ===================== */
 :root {
-    --color-primary: #1a3a5c;
+    --color-primary: #0d1117;
     --color-accent: #2e6da4;
     --color-accent-light: #4a90d9;
-    --color-bg: #f2f3f5;
-    --color-surface: #2863e4;
-    --color-text: #1e1e1e;
-    --color-text-muted: #6b7280;
-    --color-border: #dde3ea;
+    --color-bg: #161b22;
+    --color-surface: #1f2937;
+    --color-text: #e6edf3;
+    --color-text-muted: #8b949e;
+    --color-border: #30363d;
     --radius: 12px;
-    --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    --shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.14);
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.5);
     --font: 'Segoe UI', Arial, sans-serif;
 }
 
@@ -131,15 +131,16 @@ body {
 }
 
 .snapshot-label {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--color-primary);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
 }
 
 .snapshot-value {
     font-size: 1.1rem;
     font-weight: 600;
-    color: var(--color-primary);
+    color: var(--color-accent-light);
 }
 
 /*===================
@@ -174,7 +175,7 @@ body {
 .section-title {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-accent-light);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-bottom: 16px;
@@ -210,7 +211,7 @@ body {
 .card-title {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--color-primary);
+  color: var(--color-text);
   margin-bottom: 6px;
 }
 
