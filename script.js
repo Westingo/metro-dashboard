@@ -69,13 +69,15 @@ cards.forEach(function (card) {
           window.electronAPI.launchExe(exe);
         } else {
           showToast('DoorKing not found — opening download page');
-          setTimeout(() => window.open(DOORKING_DOWNLOAD_URL, '_blank'), 1500);
+          setTimeout(() => window.electronAPI.openExternal(DOORKING_DOWNLOAD_URL), 1500);
         }
       } else {
         showToast('This feature requires the desktop app');
       }
     } else if (url && url.trim() !== '') {
-      window.open(url, '_blank');
+      window.electronAPI
+        ? window.electronAPI.openExternal(url)
+        : window.open(url, '_blank');
     } else {
       showToast(title + ' — link coming soon');
     }

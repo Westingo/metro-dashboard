@@ -77,3 +77,8 @@ ipcMain.handle('check-exe-exists', (event, exePath) => {
   const fs = require('fs')
   return fs.existsSync(exePath)
 })
+
+// Open a URL in the system default browser
+ipcMain.handle('open-external', (event, url) => {
+  shell.openExternal(url)
+})
