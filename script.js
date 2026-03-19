@@ -50,7 +50,27 @@ notesArea.addEventListener('input', function () {
 
 
 // =====================
-// 4. CARD CLICK HANDLER
+// 4. TOAST NOTIFICATION
+// =====================
+function showToast(message) {
+  const existing = document.getElementById('toast');
+  if (existing) existing.remove();
+
+  const toast = document.createElement('div');
+  toast.id = 'toast';
+  toast.textContent = message;
+  document.body.appendChild(toast);
+
+  setTimeout(() => toast.classList.add('toast-visible'), 10);
+
+  setTimeout(() => {
+    toast.classList.remove('toast-visible');
+    setTimeout(() => toast.remove(), 400);
+  }, 3000);
+}
+
+// =====================
+// 5. CARD CLICK HANDLER
 // =====================
 const DOORKING_DOWNLOAD_URL = 'https://www.doorking.com/telephone-entry/software';
 
