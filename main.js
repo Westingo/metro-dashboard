@@ -78,6 +78,24 @@ ipcMain.handle('check-exe-exists', (event, exePath) => {
   return fs.existsSync(exePath)
 })
 
+// Search a directory for an exe by name across subdirectories
+ipcMain.handle('find-exe', (event, searchDir, exeName) => {
+  const fs = require('fs')
+  try {
+    if (!fs.existsSync(searchDir)) return null
+    const entries = fs.readdirSync(searchDir, { withFileTypes: true })
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        const candidate = path.join(searchDir, entry.name, exeName)
+        if (fs.existsSync(candidate)) return candidate
+      }
+    }
+    return null
+  } catch (e) {
+    return null
+  }
+})
+
 // Open a URL in the system default browser
 ipcMain.handle('open-external', (event, url) => {
   shell.openExternal(url)

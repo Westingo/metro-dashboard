@@ -64,6 +64,8 @@ cards.forEach(function (card) {
   card.addEventListener('click', async function () {
     const url = card.dataset.url;
     const exe = card.dataset.exe;
+    const exeDir = card.dataset.exeDir;
+    const exeName = card.dataset.exeName;
     const downloadUrl = card.dataset.downloadUrl;
     const page = card.dataset.page;
     const title = card.querySelector('.card-title').textContent;
@@ -71,6 +73,18 @@ cards.forEach(function (card) {
     try {
       if (page && page.trim() !== '') {
         window.location.href = page;
+      } else if (exeDir && exeName) {
+        if (window.electronAPI && typeof window.electronAPI.findExe === 'function') {
+          const foundPath = await window.electronAPI.findExe(exeDir, exeName);
+          if (foundPath) {
+            window.electronAPI.launchExe(foundPath);
+          } else if (downloadUrl) {
+            showToast(title + ' not found — opening download page');
+            setTimeout(() => window.electronAPI.openExternal(downloadUrl), 1500);
+          } else {
+            showToast(title + ' not found on this machine');
+          }
+        }
       } else if (exe && exe.trim() !== '') {
         if (window.electronAPI && typeof window.electronAPI.checkExeExists === 'function') {
           const exists = await window.electronAPI.checkExeExists(exe);
