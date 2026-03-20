@@ -1,6 +1,6 @@
 {
   "name": "metro-dashboard",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "description": "Metro Access Control - Doorking Operations Dashboard",
   "main": "main.js",
   "scripts": {
