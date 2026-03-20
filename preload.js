@@ -5,5 +5,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   checkExeExists: (exePath) => ipcRenderer.invoke('check-exe-exists', exePath),
   openExternal: (url) => ipcRenderer.invoke('open-external', url),
   openPage: (page) => ipcRenderer.invoke('open-page', page),
-  findExe: (searchDir, exeName) => ipcRenderer.invoke('find-exe', searchDir, exeName)
+  findExe: (searchDir, exeName) => ipcRenderer.invoke('find-exe', searchDir, exeName),
+  listManuals: () => ipcRenderer.invoke('list-manuals'),
+  openPdf: (filename) => ipcRenderer.invoke('open-pdf', filename)
 })

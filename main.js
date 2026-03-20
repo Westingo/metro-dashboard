@@ -2,6 +2,13 @@ const { app, BrowserWindow, shell, ipcMain, dialog } = require('electron')
 const { exec } = require('child_process')
 const { autoUpdater } = require('electron-updater')
 const path = require('path')
+const fs = require('fs')
+
+function getManualsDir() {
+  return app.isPackaged
+    ? path.join(process.resourcesPath, 'app.asar.unpacked', 'manuals')
+    : path.join(__dirname, 'manuals')
+}
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -107,6 +114,19 @@ ipcMain.handle('find-exe', (event, searchDirs, exeName) => {
   } catch (e) {
     return null
   }
+})
+
+// List PDF files in the manuals directory
+ipcMain.handle('list-manuals', () => {
+  const dir = getManualsDir()
+  if (!fs.existsSync(dir)) return []
+  return fs.readdirSync(dir).filter(f => f.toLowerCase().endsWith('.pdf'))
+})
+
+// Open a PDF with the system default PDF viewer
+ipcMain.handle('open-pdf', (event, filename) => {
+  const filePath = path.join(getManualsDir(), filename)
+  shell.openPath(filePath)
 })
 
 // Open a URL in the system default browser
