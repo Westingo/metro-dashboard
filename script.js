@@ -70,9 +70,7 @@ cards.forEach(function (card) {
 
     try {
       if (page && page.trim() !== '') {
-        if (window.electronAPI && typeof window.electronAPI.openPage === 'function') {
-          window.electronAPI.openPage(page);
-        }
+        window.location.href = page;
       } else if (exe && exe.trim() !== '') {
         if (window.electronAPI && typeof window.electronAPI.checkExeExists === 'function') {
           const exists = await window.electronAPI.checkExeExists(exe);
