@@ -1,6 +1,6 @@
 {
   "name": "metro-dashboard",
-  "version": "2.1.7",
+  "version": "2.1.8",
   "description": "Metro Access Control - Doorking Operations Dashboard",
   "main": "main.js",
   "scripts": {
@@ -29,7 +29,9 @@
       "assets/**",
       "manuals/**"
     ],
-    "asarUnpack": ["manuals/**"],
+    "asarUnpack": [
+      "manuals/**"
+    ],
     "publish": {
       "provider": "github",
       "owner": "Westingo",
