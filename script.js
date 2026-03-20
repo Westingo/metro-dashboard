@@ -64,7 +64,7 @@ cards.forEach(function (card) {
   card.addEventListener('click', async function () {
     const url = card.dataset.url;
     const exe = card.dataset.exe;
-    const exeDir = card.dataset.exeDir;
+    const exeDirs = card.dataset.exeDirs ? JSON.parse(card.dataset.exeDirs) : null;
     const exeName = card.dataset.exeName;
     const downloadUrl = card.dataset.downloadUrl;
     const page = card.dataset.page;
@@ -73,9 +73,9 @@ cards.forEach(function (card) {
     try {
       if (page && page.trim() !== '') {
         window.location.href = page;
-      } else if (exeDir && exeName) {
+      } else if (exeDirs && exeName) {
         if (window.electronAPI && typeof window.electronAPI.findExe === 'function') {
-          const foundPath = await window.electronAPI.findExe(exeDir, exeName);
+          const foundPath = await window.electronAPI.findExe(exeDirs, exeName);
           if (foundPath) {
             window.electronAPI.launchExe(foundPath);
           } else if (downloadUrl) {

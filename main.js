@@ -78,16 +78,29 @@ ipcMain.handle('check-exe-exists', (event, exePath) => {
   return fs.existsSync(exePath)
 })
 
-// Search a directory for an exe by name across subdirectories
-ipcMain.handle('find-exe', (event, searchDir, exeName) => {
+// Expand Windows environment variables in a path string
+function expandEnvVars(str) {
+  return str.replace(/%([^%]+)%/g, (_, key) => process.env[key] || '')
+}
+
+// Search multiple directories for an exe by name across subdirectories
+ipcMain.handle('find-exe', (event, searchDirs, exeName) => {
   const fs = require('fs')
+  const dirs = Array.isArray(searchDirs) ? searchDirs : [searchDirs]
   try {
-    if (!fs.existsSync(searchDir)) return null
-    const entries = fs.readdirSync(searchDir, { withFileTypes: true })
-    for (const entry of entries) {
-      if (entry.isDirectory()) {
-        const candidate = path.join(searchDir, entry.name, exeName)
-        if (fs.existsSync(candidate)) return candidate
+    for (const rawDir of dirs) {
+      const searchDir = expandEnvVars(rawDir)
+      if (!fs.existsSync(searchDir)) continue
+      // Check the directory itself first
+      const direct = path.join(searchDir, exeName)
+      if (fs.existsSync(direct)) return direct
+      // Then check one level of subdirectories (for versioned folders)
+      const entries = fs.readdirSync(searchDir, { withFileTypes: true })
+      for (const entry of entries) {
+        if (entry.isDirectory()) {
+          const candidate = path.join(searchDir, entry.name, exeName)
+          if (fs.existsSync(candidate)) return candidate
+        }
       }
     }
     return null
