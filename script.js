@@ -113,3 +113,72 @@ cards.forEach(function (card) {
     }
   });
 });
+
+
+// =====================
+// 6. HIDDEN TECH PANEL
+// =====================
+const brandName = document.querySelector('.brand-name');
+const techOverlay = document.getElementById('tech-overlay');
+const techClose = document.getElementById('tech-close');
+
+let clickCount = 0;
+let clickTimer = null;
+
+brandName.addEventListener('click', () => {
+  clickCount++;
+  clearTimeout(clickTimer);
+
+  if (clickCount >= 6) {
+    clickCount = 0;
+    openTechPanel();
+  } else {
+    clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
+  }
+});
+
+function openTechPanel() {
+  techOverlay.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  loadTechData();
+}
+
+function closeTechPanel() {
+  techOverlay.classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+techClose.addEventListener('click', closeTechPanel);
+
+techOverlay.addEventListener('click', (e) => {
+  if (e.target === techOverlay) closeTechPanel();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeTechPanel();
+});
+
+const techFields = [
+  'tech-site-name',
+  'tech-gate-model',
+  'tech-entry-phone',
+  'tech-site-notes',
+  'tech-field-notes'
+];
+
+function loadTechData() {
+  techFields.forEach(id => {
+    const el = document.getElementById(id);
+    const saved = localStorage.getItem(id);
+    if (el && saved) el.value = saved;
+  });
+}
+
+techFields.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.addEventListener('input', () => {
+      localStorage.setItem(id, el.value);
+    });
+  }
+});
