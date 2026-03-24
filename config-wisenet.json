@@ -4,7 +4,7 @@
   "cards": [
     {
       "type": "exe-search",
-      "icon": "🎥",
+      "icon": "📷",
       "title": "Wisenet WAVE",
       "desc": "Launch Wisenet WAVE VMS Client",
       "category": "tool",
