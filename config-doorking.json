@@ -1,6 +1,7 @@
 {
   "customer": "Doorking Site",
   "channel": "doorking",
+  "manualSources": ["doorking"],
   "cards": [
     {
       "type": "exe",

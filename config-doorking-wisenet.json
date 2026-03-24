@@ -1,8 +1,17 @@
 {
-  "customer": "Wisenet Site",
-  "channel": "wisenet",
-  "manualSources": ["wisenet"],
+  "customer": "Doorking + Wisenet Site",
+  "channel": "doorking-wisenet",
+  "manualSources": ["doorking", "wisenet"],
   "cards": [
+    {
+      "type": "exe",
+      "icon": "💻",
+      "title": "Doorking Account Manager",
+      "desc": "Launch DoorKing32 Account Manager",
+      "category": "tool",
+      "exe": "C:\\Program Files (x86)\\DoorKing\\DoorKing Account Manager\\DoorKing32.exe",
+      "downloadUrl": "https://www.doorking.com/telephone-entry/software"
+    },
     {
       "type": "exe-search",
       "icon": "📷",

@@ -21,10 +21,11 @@ if (!fs.existsSync(sourceConfig)) {
 
 // Copy the customer config to the active config.json
 fs.copyFileSync(sourceConfig, path.join(root, 'config.json'))
+const customerConfig = JSON.parse(fs.readFileSync(sourceConfig, 'utf8'))
 
-// Populate manuals/ from the channel-specific manuals folder
+// Populate manuals/ from one or more source folders defined in the config
 const manualsDir = path.join(root, 'manuals')
-const channelManualsDir = path.join(root, `manuals-${channel}`)
+const manualSources = customerConfig.manualSources || [channel]
 
 // Clear any existing manuals
 if (fs.existsSync(manualsDir)) {
@@ -33,13 +34,16 @@ if (fs.existsSync(manualsDir)) {
     .forEach(f => fs.unlinkSync(path.join(manualsDir, f)))
 }
 
-// Copy channel-specific manuals in
-if (fs.existsSync(channelManualsDir)) {
-  fs.readdirSync(channelManualsDir)
-    .filter(f => f !== '.gitkeep')
-    .forEach(f => {
-      fs.copyFileSync(path.join(channelManualsDir, f), path.join(manualsDir, f))
-    })
+// Copy manuals from each source folder
+for (const source of manualSources) {
+  const sourceDir = path.join(root, `manuals-${source}`)
+  if (fs.existsSync(sourceDir)) {
+    fs.readdirSync(sourceDir)
+      .filter(f => f !== '.gitkeep')
+      .forEach(f => {
+        fs.copyFileSync(path.join(sourceDir, f), path.join(manualsDir, f))
+      })
+  }
 }
 
 // Update package.json with the channel and a unique artifact name
