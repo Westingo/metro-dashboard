@@ -1,0 +1,45 @@
+{
+  "customer": "Brivo + Wisenet Site",
+  "channel": "brivo-wisenet",
+  "manualSources": ["brivo", "wisenet"],
+  "cards": [
+    {
+      "type": "url",
+      "icon": "🔐",
+      "title": "Brivo Access",
+      "desc": "Open Brivo access control portal",
+      "category": "tool",
+      "url": "https://account.brivo.com/global/index.html?useGlobalLogin=true"
+    },
+    {
+      "type": "exe-search",
+      "icon": "📷",
+      "title": "Wisenet WAVE",
+      "desc": "Launch Wisenet WAVE VMS Client",
+      "category": "tool",
+      "exeDirs": [
+        "C:\\Program Files\\Hanwha\\Wisenet WAVE\\Client",
+        "C:\\ProgramData\\Hanwha\\Wisenet WAVE\\Client",
+        "C:\\Program Files (x86)\\Hanwha\\Wisenet WAVE\\Client"
+      ],
+      "exeName": "Wisenet WAVE Launcher.exe",
+      "downloadUrl": "https://sync.wavevms.com/download/windows"
+    },
+    {
+      "type": "page",
+      "icon": "📞",
+      "title": "Metro Support Contacts",
+      "desc": "24/7 dispatch numbers and contact info",
+      "category": "contacts",
+      "page": "contacts.html"
+    },
+    {
+      "type": "page",
+      "icon": "📚",
+      "title": "Manuals Library",
+      "desc": "Equipment manuals and reference guides",
+      "category": "resource",
+      "page": "manuals.html"
+    }
+  ]
+}
