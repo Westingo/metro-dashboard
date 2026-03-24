@@ -33,6 +33,7 @@ jobs:
 
   build-wisenet:
     runs-on: windows-latest
+    needs: build-doorking
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -55,6 +56,7 @@ jobs:
 
   build-doorking-wisenet:
     runs-on: windows-latest
+    needs: build-wisenet
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
