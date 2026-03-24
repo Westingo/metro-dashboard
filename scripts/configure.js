@@ -46,7 +46,7 @@ if (fs.existsSync(channelManualsDir)) {
 const pkgPath = path.join(root, 'package.json')
 const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'))
 
-pkg.build.channel = channel
+pkg.build.publish.channel = channel
 pkg.build.win.artifactName = `\${productName}-${channel}-Setup-\${version}.\${ext}`
 
 fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2))
