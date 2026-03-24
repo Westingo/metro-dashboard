@@ -33,10 +33,8 @@ searchBar.addEventListener('input', function () {
 });
 
 
-
-
 // =====================
-// 4. TOAST NOTIFICATION
+// 3. TOAST NOTIFICATION
 // =====================
 function showToast(message) {
   const existing = document.getElementById('toast');
@@ -55,64 +53,113 @@ function showToast(message) {
   }, 3000);
 }
 
+
+// =====================
+// 4. LOAD CARDS FROM CONFIG
+// =====================
+function buildCardHTML(card) {
+  const attrs = [];
+
+  if (card.type === 'exe') {
+    attrs.push(`data-exe="${card.exe}"`);
+    if (card.downloadUrl) attrs.push(`data-download-url="${card.downloadUrl}"`);
+  } else if (card.type === 'exe-search') {
+    attrs.push(`data-exe-dirs='${JSON.stringify(card.exeDirs)}'`);
+    attrs.push(`data-exe-name="${card.exeName}"`);
+    if (card.downloadUrl) attrs.push(`data-download-url="${card.downloadUrl}"`);
+  } else if (card.type === 'page') {
+    attrs.push(`data-page="${card.page}"`);
+  } else if (card.type === 'url') {
+    attrs.push(`data-url="${card.url}"`);
+  }
+
+  return `
+    <div class="card" data-category="${card.category || ''}" ${attrs.join(' ')}>
+      <div class="card-icon">${card.icon || '🔧'}</div>
+      <div class="card-title">${card.title}</div>
+      <div class="card-desc">${card.desc || ''}</div>
+    </div>`;
+}
+
+async function loadCards() {
+  const grid = document.getElementById('card-grid');
+  if (!grid) return;
+
+  let config = { cards: [] };
+  try {
+    const res = await fetch('./config.json');
+    config = await res.json();
+  } catch (e) {
+    console.warn('Could not load config.json:', e);
+  }
+
+  grid.innerHTML = config.cards.map(buildCardHTML).join('');
+  setupCardClicks();
+}
+
+
 // =====================
 // 5. CARD CLICK HANDLER
 // =====================
-const cards = document.querySelectorAll('.card');
+function setupCardClicks() {
+  const cards = document.querySelectorAll('.card');
 
-cards.forEach(function (card) {
-  card.addEventListener('click', async function () {
-    const url = card.dataset.url;
-    const exe = card.dataset.exe;
-    const exeDirs = card.dataset.exeDirs ? JSON.parse(card.dataset.exeDirs) : null;
-    const exeName = card.dataset.exeName;
-    const downloadUrl = card.dataset.downloadUrl;
-    const page = card.dataset.page;
-    const title = card.querySelector('.card-title').textContent;
+  cards.forEach(function (card) {
+    card.addEventListener('click', async function () {
+      const url = card.dataset.url;
+      const exe = card.dataset.exe;
+      const exeDirs = card.dataset.exeDirs ? JSON.parse(card.dataset.exeDirs) : null;
+      const exeName = card.dataset.exeName;
+      const downloadUrl = card.dataset.downloadUrl;
+      const page = card.dataset.page;
+      const title = card.querySelector('.card-title').textContent;
 
-    try {
-      if (page && page.trim() !== '') {
-        window.location.href = page;
-      } else if (exeDirs && exeName) {
-        if (window.electronAPI && typeof window.electronAPI.findExe === 'function') {
-          const foundPath = await window.electronAPI.findExe(exeDirs, exeName);
-          if (foundPath) {
-            window.electronAPI.launchExe(foundPath);
-          } else if (downloadUrl) {
-            showToast(title + ' not found — opening download page');
-            setTimeout(() => window.electronAPI.openExternal(downloadUrl), 1500);
-          } else {
-            showToast(title + ' not found on this machine');
+      try {
+        if (page && page.trim() !== '') {
+          window.location.href = page;
+        } else if (exeDirs && exeName) {
+          if (window.electronAPI && typeof window.electronAPI.findExe === 'function') {
+            const foundPath = await window.electronAPI.findExe(exeDirs, exeName);
+            if (foundPath) {
+              window.electronAPI.launchExe(foundPath);
+            } else if (downloadUrl) {
+              showToast(title + ' not found — opening download page');
+              setTimeout(() => window.electronAPI.openExternal(downloadUrl), 1500);
+            } else {
+              showToast(title + ' not found on this machine');
+            }
           }
-        }
-      } else if (exe && exe.trim() !== '') {
-        if (window.electronAPI && typeof window.electronAPI.checkExeExists === 'function') {
-          const exists = await window.electronAPI.checkExeExists(exe);
-          if (exists) {
-            window.electronAPI.launchExe(exe);
-          } else if (downloadUrl) {
-            showToast(title + ' not found — opening download page');
-            setTimeout(() => window.electronAPI.openExternal(downloadUrl), 1500);
+        } else if (exe && exe.trim() !== '') {
+          if (window.electronAPI && typeof window.electronAPI.checkExeExists === 'function') {
+            const exists = await window.electronAPI.checkExeExists(exe);
+            if (exists) {
+              window.electronAPI.launchExe(exe);
+            } else if (downloadUrl) {
+              showToast(title + ' not found — opening download page');
+              setTimeout(() => window.electronAPI.openExternal(downloadUrl), 1500);
+            } else {
+              showToast(title + ' not found on this machine');
+            }
           } else {
-            showToast(title + ' not found on this machine');
+            showToast('This feature requires the desktop app');
+          }
+        } else if (url && url.trim() !== '') {
+          if (window.electronAPI && typeof window.electronAPI.openExternal === 'function') {
+            window.electronAPI.openExternal(url);
+          } else {
+            window.open(url, '_blank');
           }
         } else {
-          showToast('This feature requires the desktop app');
+          showToast(title + ' — link coming soon');
         }
-      } else if (url && url.trim() !== '') {
-        if (window.electronAPI && typeof window.electronAPI.openExternal === 'function') {
-          window.electronAPI.openExternal(url);
-        } else {
-          window.open(url, '_blank');
-        }
-      } else {
-        showToast(title + ' — link coming soon');
+      } catch (err) {
+        showToast('Error: ' + err.message);
       }
-    } catch (err) {
-      showToast('Error: ' + err.message);
-    }
+    });
   });
-});
+}
+
+loadCards();
 
 
 // =====================

@@ -1,0 +1,31 @@
+{
+  "customer": "Doorking Site",
+  "channel": "doorking",
+  "cards": [
+    {
+      "type": "exe",
+      "icon": "💻",
+      "title": "Doorking Account Manager",
+      "desc": "Launch DoorKing32 Account Manager",
+      "category": "tool",
+      "exe": "C:\\Program Files (x86)\\DoorKing\\DoorKing Account Manager\\DoorKing32.exe",
+      "downloadUrl": "https://www.doorking.com/telephone-entry/software"
+    },
+    {
+      "type": "page",
+      "icon": "📞",
+      "title": "Metro Support Contacts",
+      "desc": "24/7 dispatch numbers and contact info",
+      "category": "contacts",
+      "page": "contacts.html"
+    },
+    {
+      "type": "page",
+      "icon": "📚",
+      "title": "Manuals Library",
+      "desc": "Equipment manuals and reference guides",
+      "category": "resource",
+      "page": "manuals.html"
+    }
+  ]
+}

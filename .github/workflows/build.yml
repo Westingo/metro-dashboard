@@ -9,9 +9,8 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  build-doorking:
     runs-on: windows-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -24,8 +23,32 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build and publish .exe
+      - name: Configure for Doorking channel
+        run: node scripts/configure.js doorking
+
+      - name: Build and publish Doorking installer
         run: npx electron-builder --publish always
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  build-wisenet:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Configure for Wisenet channel
+        run: node scripts/configure.js wisenet
+
+      - name: Build and publish Wisenet installer
+        run: npx electron-builder --publish always
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

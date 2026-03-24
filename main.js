@@ -10,6 +10,15 @@ function getManualsDir() {
     : path.join(__dirname, 'manuals')
 }
 
+function getAppConfig() {
+  try {
+    const configPath = path.join(app.getAppPath(), 'config.json')
+    return JSON.parse(fs.readFileSync(configPath, 'utf8'))
+  } catch (e) {
+    return {}
+  }
+}
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 1280,
@@ -30,6 +39,10 @@ function createWindow() {
 app.whenReady().then(() => {
   createWindow()
 
+  const appConfig = getAppConfig()
+  if (appConfig.channel) {
+    autoUpdater.channel = appConfig.channel
+  }
   autoUpdater.checkForUpdatesAndNotify()
 
   autoUpdater.on('update-available', () => {
