@@ -1,6 +1,6 @@
 {
   "name": "metro-dashboard",
-  "version": "2.5.4",
+  "version": "2.5.5",
   "description": "Metro Access Control - Doorking Operations Dashboard",
   "main": "main.js",
   "scripts": {
@@ -12,7 +12,8 @@
     "productName": "Metro Dashboard",
     "win": {
       "target": "nsis",
-      "icon": "assets/icon.ico"
+      "icon": "assets/icon.ico",
+      "artifactName": "${productName}-brivo-Setup-${version}.${ext}"
     },
     "nsis": {
       "oneClick": false,
@@ -37,7 +38,8 @@
       "provider": "github",
       "owner": "Westingo",
       "repo": "metro-dashboard",
-      "releaseType": "release"
+      "releaseType": "release",
+      "channel": "brivo"
     }
   },
   "keywords": [],
