@@ -145,3 +145,26 @@ jobs:
         run: npx electron-builder --publish always
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build-myq-wisenet:
+    runs-on: windows-latest
+    needs: build-myq
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Configure for MyQ + Wisenet channel
+        run: node scripts/configure.js myq-wisenet
+
+      - name: Build and publish MyQ + Wisenet installer
+        run: npx electron-builder --publish always
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
