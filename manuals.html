@@ -103,18 +103,24 @@
       const files = await window.electronAPI.listManuals()
 
       if (!files || files.length === 0) {
-        list.innerHTML = '<div class="empty-state">No manuals found. Add PDF files to the manuals folder.</div>'
+        list.innerHTML = '<div class="empty-state">No manuals or videos found.</div>'
         return
       }
 
+      const videoExts = ['.mp4', '.mov', '.avi', '.mkv', '.webm']
+
       list.innerHTML = files.map(filename => {
-        const displayName = filename.replace(/\.pdf$/i, '').replace(/[-_]/g, ' ')
+        const ext = filename.substring(filename.lastIndexOf('.')).toLowerCase()
+        const isVideo = videoExts.includes(ext)
+        const icon = isVideo ? '🎬' : '📄'
+        const hint = isVideo ? 'Click to play video' : 'Click to open PDF'
+        const displayName = filename.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ')
         return `
           <div class="manual-card" onclick="openManual('${filename.replace(/'/g, "\\'")}')">
-            <div class="manual-icon">📄</div>
+            <div class="manual-icon">${icon}</div>
             <div>
               <div class="manual-name">${displayName}</div>
-              <div class="manual-hint">Click to open</div>
+              <div class="manual-hint">${hint}</div>
             </div>
           </div>`
       }).join('')

@@ -5,7 +5,7 @@
   "cards": [
     {
       "type": "url",
-      "icon": "🔐",
+      "icon": "assets/logos/brivo.png",
       "title": "Brivo Access",
       "desc": "Open Brivo access control portal",
       "category": "tool",
@@ -13,7 +13,7 @@
     },
     {
       "type": "page",
-      "icon": "📞",
+      "icon": "assets/logos/Metro.png",
       "title": "Metro Support Contacts",
       "desc": "24/7 dispatch numbers and contact info",
       "category": "contacts",

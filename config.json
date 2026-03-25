@@ -1,19 +1,33 @@
 {
-  "customer": "MyQ Site",
-  "channel": "myq",
-  "manualSources": ["myq"],
+  "customer": "Brivo + Wisenet Site",
+  "channel": "brivo-wisenet",
+  "manualSources": ["brivo", "wisenet"],
   "cards": [
     {
       "type": "url",
-      "icon": "🚗",
-      "title": "MyQ",
-      "desc": "Open MyQ access control portal",
+      "icon": "assets/logos/brivo.png",
+      "title": "Brivo Access",
+      "desc": "Open Brivo access control portal",
       "category": "tool",
-      "url": "https://account.myq.com/"
+      "url": "https://account.brivo.com/global/index.html?useGlobalLogin=true"
+    },
+    {
+      "type": "exe-search",
+      "icon": "assets/logos/Wisenet.webp",
+      "title": "Wisenet WAVE",
+      "desc": "Launch Wisenet WAVE VMS Client",
+      "category": "tool",
+      "exeDirs": [
+        "C:\\Program Files\\Hanwha\\Wisenet WAVE\\Client",
+        "C:\\ProgramData\\Hanwha\\Wisenet WAVE\\Client",
+        "C:\\Program Files (x86)\\Hanwha\\Wisenet WAVE\\Client"
+      ],
+      "exeName": "Wisenet WAVE Launcher.exe",
+      "downloadUrl": "https://sync.wavevms.com/download/windows"
     },
     {
       "type": "page",
-      "icon": "📞",
+      "icon": "assets/logos/Metro.png",
       "title": "Metro Support Contacts",
       "desc": "24/7 dispatch numbers and contact info",
       "category": "contacts",

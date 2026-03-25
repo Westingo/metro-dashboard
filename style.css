@@ -220,6 +220,13 @@ body {
   margin-bottom: 12px;
 }
 
+.card-icon img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+}
+
 .card-title {
   font-size: 1rem;
   font-weight: 600;

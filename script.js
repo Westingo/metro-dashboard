@@ -75,7 +75,7 @@ function buildCardHTML(card) {
 
   return `
     <div class="card" data-category="${card.category || ''}" ${attrs.join(' ')}>
-      <div class="card-icon">${card.icon || '🔧'}</div>
+      <div class="card-icon">${card.icon && card.icon.startsWith('assets/') ? `<img src="${card.icon}" alt="${card.title}">` : (card.icon || '🔧')}</div>
       <div class="card-title">${card.title}</div>
       <div class="card-desc">${card.desc || ''}</div>
     </div>`;

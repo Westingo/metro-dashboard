@@ -5,7 +5,7 @@
   "cards": [
     {
       "type": "exe",
-      "icon": "💻",
+      "icon": "assets/logos/doorking.webp",
       "title": "Doorking Account Manager",
       "desc": "Launch DoorKing32 Account Manager",
       "category": "tool",
@@ -14,7 +14,7 @@
     },
     {
       "type": "exe-search",
-      "icon": "📷",
+      "icon": "assets/logos/Wisenet.webp",
       "title": "Wisenet WAVE",
       "desc": "Launch Wisenet WAVE VMS Client",
       "category": "tool",
@@ -28,7 +28,7 @@
     },
     {
       "type": "page",
-      "icon": "📞",
+      "icon": "assets/logos/Metro.png",
       "title": "Metro Support Contacts",
       "desc": "24/7 dispatch numbers and contact info",
       "category": "contacts",

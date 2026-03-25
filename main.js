@@ -133,7 +133,8 @@ ipcMain.handle('find-exe', (event, searchDirs, exeName) => {
 ipcMain.handle('list-manuals', () => {
   const dir = getManualsDir()
   if (!fs.existsSync(dir)) return []
-  return fs.readdirSync(dir).filter(f => f.toLowerCase().endsWith('.pdf'))
+  const allowed = ['.pdf', '.mp4', '.mov', '.avi', '.mkv', '.webm']
+  return fs.readdirSync(dir).filter(f => allowed.includes(path.extname(f).toLowerCase()))
 })
 
 // Open a PDF with the system default PDF viewer
